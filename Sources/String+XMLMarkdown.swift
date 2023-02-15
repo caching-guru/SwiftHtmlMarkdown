@@ -167,7 +167,7 @@ public extension String {
     }
     func renderChildNode(_ node: SwiftSoup.Node, counter: Int = 0, throwError: Bool = true) throws -> String {
         let name = node.nodeName()
-        print("rendering: ", name, counter)
+        
         var r = ""
         var counter1 = counter
         if ["html", "head", "body"].contains(name) {
