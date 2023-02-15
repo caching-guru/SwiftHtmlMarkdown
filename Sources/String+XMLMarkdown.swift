@@ -210,7 +210,22 @@ public extension String {
             r = r + "\n"
         }
         else if name == "code" {
-            r = r + "\n"
+            var language = ""
+            if let c = node.getAttributes()?.get(key: "class") {
+                let classes = c.split(separator: " ")
+                for cl in classes {
+                    if cl.prefix(9) == "language-" {
+                        language = cl.substring(from: cl.index(cl.startIndex, offsetBy: 9))
+                    }
+                }
+                print("c: ", language)
+            }
+            r = r + "```\(language)\n"
+            let accum: StringBuilder = StringBuilder()
+            for node in node.getChildNodes() {
+                try node.outerHtml(accum)
+            }
+            return r + accum.toString() + "```\n\n"
         }
         else if name == "ol" {
             counter1 = 1
@@ -301,7 +316,7 @@ public extension String {
         }
         
         if name == "p" {
-            r = r + "\n"
+            r = r + "\n\n"
         }
         else if name == "a" {
             if let href = node.getAttributes()?.get(key: "href") {
@@ -312,16 +327,16 @@ public extension String {
             }
         }
         else if name == "h1" {
-            r = r + "\n"
+            r = r + "\n\n"
         }
         else if name == "h2" {
-            r = r + "\n"
+            r = r + "\n\n"
         }
         else if name == "h3" {
-            r = r + "\n"
+            r = r + "\n\n"
         }
         else if name == "h4" {
-            r = r + "\n"
+            r = r + "\n\n"
         }
         else if name == "h5" {
             r = r + "\n"
