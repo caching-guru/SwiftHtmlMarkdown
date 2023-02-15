@@ -10,6 +10,76 @@ import XCTest
 @testable import HtmlMarkdown
 
 class MarkdownTest: XCTestCase {
+    func testArabCode() {
+        let xml = """
+         <p style=";text-align:right;direction:rtl">يعد تحسين <code class="notranslate language-javascript">Engine</code> البحث (SEO) أمرًا بالغ الأهمية لمواقع الويب التي تريد أن تكون مرئية على محركات البحث مثل Google و Bing و Yahoo. تعد العلامات الوصفية جزءًا مهمًا من استراتيجية تحسين محركات البحث وتزود محركات البحث بمعلومات حول موقع الويب. ومع ذلك ، فإن Angular ، وهو إطار JavaScript شائع لبناء تطبيقات الويب ، يمثل تحديات عند تنفيذ العلامات الوصفية.</p><p style=";text-align:right;direction:rtl"> ستناقش هذه المقالة كيفية جعل العلامات الوصفية لتحسين محركات البحث تعمل مع Angular. سنغطي أساسيات العلامات الوصفية ، ولماذا تعتبر ضرورية لتحسين محركات البحث ، وكيف تؤثر بنية Angular على تنفيذ العلامات الوصفية. بالإضافة إلى ذلك ، سوف نستكشف العديد من التقنيات والأدوات التي يمكن استخدامها للتغلب على التحديات التي تطرحها Angular والتأكد من أن العلامات الوصفية لموقع الويب الخاص بك تعمل على النحو الأمثل لتحسين محركات البحث.</p><h2 style=";text-align:right;direction:rtl"> لماذا تعتبر العلامات الوصفية مهمة لتحسين محركات البحث؟</h2><p style=";text-align:right;direction:rtl"> توفر العلامات الوصفية لمحركات البحث معلومات مهمة حول موقع الويب ، مثل العنوان والوصف والكلمات الرئيسية. تستخدم محركات البحث هذه المعلومات لتحديد مدى صلة موقع الويب باستعلام بحث المستخدم ولتحديد مكان وضع موقع الويب في صفحات نتائج محرك البحث (SERPs).</p><p style=";text-align:right;direction:rtl"> تعد علامات العنوان والوصف أهم علامتي تعريف لتحسين محركات البحث. يتم عرض علامة العنوان كعنوان لنتيجة محرك البحث ، وتوفر علامة الوصف ملخصًا لمحتوى موقع الويب. يجب أن تكون علامات العنوان والوصف فريدة لكل صفحة على موقع الويب وتعكس بدقة محتوى تلك الصفحة.</p><p style=";text-align:right;direction:rtl"> بينما أقل أهمية من مرة ، لا تزال الكلمات الرئيسية تلعب دورًا في تحسين محركات البحث. توفر العلامة الوصفية للكلمات الرئيسية قائمة بالكلمات والعبارات المتعلقة بمحتوى موقع الويب. تستخدم محركات البحث هذه الكلمات الرئيسية لتحديد مدى صلة موقع الويب باستعلام بحث المستخدم.</p><h2 style=";text-align:right;direction:rtl"> كيف يؤثر Angular في تنفيذ العلامات الوصفية</h2><p style=";text-align:right;direction:rtl"> تؤثر بنية Angular في تنفيذ العلامات الوصفية بعدة طرق. أولاً ، يستخدم Angular العرض من جانب العميل ، مما يعني أن HTML لموقع الويب يتم إنشاؤه ديناميكيًا على جانب العميل بدلاً من إنشاؤه على الخادم ثم إرساله إلى العميل. هذا يعني أن محركات البحث لا يمكنها الزحف إلى HTML لموقع Angular كما هو الحال مع موقع ويب تقليدي معروض من جانب الخادم.</p><p style=";text-align:right;direction:rtl"> ثانيًا ، يعني استخدام Angular للتطبيقات أحادية الصفحة (SPAs) أن HTML لموقع الويب يتم تحديثه ديناميكيًا حيث يتفاعل المستخدم مع موقع الويب بدلاً من إعادة تحميله في كل مرة ينتقل فيها المستخدم إلى صفحة جديدة. هذا يجعل من الصعب على محركات البحث الزحف إلى HTML لموقع Angular على الويب ، لأنها تحتاج إلى تحديد متى يتم تحميل صفحة جديدة بسرعة.</p><p style=";text-align:right;direction:rtl"> أخيرًا ، استخدام Angular للتوجيه للتعامل مع التنقل بين الصفحات يعني أن عنوان URL لموقع الويب لا يتغير عندما ينتقل المستخدم إلى صفحة جديدة. قد يجعل ذلك من الصعب على محركات البحث فهم بنية موقع Angular وتحديد مدى صلة كل صفحة باستعلام بحث المستخدم.</p><h2 style=";text-align:right;direction:rtl"> تقنيات تنفيذ العلامات الوصفية في Angular</h2><p style=";text-align:right;direction:rtl"> هناك العديد من التقنيات التي يمكن استخدامها لتنفيذ العلامات الوصفية في Angular. تتراوح هذه التقنيات من استخدام ميزات Angular المضمنة إلى استخدام مكتبات وأدوات الطرف الثالث.</p><h3 style=";text-align:right;direction:rtl"> استخدم ميزات Angular المدمجة</h3><p style=";text-align:right;direction:rtl"> يوفر Angular العديد من الميزات المضمنة التي يمكن استخدامها لتنفيذ العلامات الوصفية. إحدى هذه الميزات هي خدمة العنوان ، والتي تسمح لك بتعيين علامة العنوان للصفحة. آخر هو خدمة Meta ، والتي تسمح لك بتعيين وصف الصفحة والعلامات الوصفية للكلمات الرئيسية.</p><p style=";text-align:right;direction:rtl"> لاستخدام خدمات العنوان والميتا ، يجب عليك استيرادهما إلى المكون الخاص بك واستخدام التابعين setTitle () و addTag () ، على التوالي. تسمح لك طريقة setTitle () بتعيين علامة العنوان للصفحة ، بينما تسمح لك طريقة addTag () بإضافة علامات وصفية أخرى ، مثل الوصف والكلمات الأساسية.</p><p style=";text-align:right;direction:rtl"> فيما يلي مثال لكيفية استخدام العنوان وخدمات التعريف في مكون Angular:</p><pre class="notranslate" style=";text-align:right;direction:rtl"> <code class="notranslate language-typescript">import { Title, Meta } from '@angular/platform-browser';
+
+        @Component({
+          selector: 'app-root',
+          template: `
+            </code><h1 style=";text-align:right;direction:rtl">{{title}}</h1>
+          `,
+        })
+        export class AppComponent {
+          title = 'My Angular App';
+
+          constructor(private titleService: Title, private metaService: Meta) {
+            this.titleService.setTitle(this.title);
+            this.metaService.addTags([
+              { name: 'description', content: 'This is my Angular app.' },
+              { name: 'keywords', content: 'angular, app, seo' },
+            ]);
+          }
+        }
+        </pre><p style=";text-align:right;direction:rtl">في هذا المثال ، يتم استيراد خدمات العنوان والميتا إلى المكون ثم استخدامها في المُنشئ لتعيين علامة العنوان والوصف والعلامات الوصفية للكلمات الرئيسية ، على التوالي.</p><h3 style=";text-align:right;direction:rtl"> استخدم مكتبات وأدوات الطرف الثالث</h3><p style=";text-align:right;direction:rtl"> يمكن استخدام العديد من مكتبات وأدوات الطرف الثالث لتنفيذ العلامات الوصفية في Angular. واحدة من أكثر المكتبات شيوعًا هي Angular Universal module ، والتي تتيح لك استخدام العرض من جانب الخادم مع Angular.</p><p style=";text-align:right;direction:rtl"> تقوم Angular Universal بإنشاء HTML لموقع ويب على الخادم ثم إرسالها إلى العميل ، تمامًا مثل موقع ويب تقليدي يتم عرضه من جانب الخادم. هذا يجعل من السهل على محركات البحث الزحف إلى HTML الخاص بموقع Angular ، حيث يمكنهم الزحف إلى HTML كما يتم إنشاؤه على الخادم.</p><p style=";text-align:right;direction:rtl"> لاستخدام Angular Universal ، تحتاج إلى تثبيت الوحدة ثم تكوينها للعمل مع تطبيق Angular الخاص بك. بمجرد القيام بذلك ، يمكنك استخدام العنوان وخدمات التعريف ، أو أي طريقة أخرى ، لتنفيذ العلامات الوصفية في تطبيق Angular الخاص بك ، تمامًا كما تفعل مع موقع ويب تقليدي مقدم من جانب الخادم.</p><p style=";text-align:right;direction:rtl"> أداة أخرى يمكن استخدامها لتنفيذ العلامات الوصفية في Angular هي وحدة العلامات الوصفية لـ Angular. توفر هذه الوحدة واجهة برمجة تطبيقات بسيطة وسهلة الاستخدام لإعداد وتحديث العلامات الوصفية في تطبيق Angular.</p><p style=";text-align:right;direction:rtl"> لاستخدام وحدة العلامات الوصفية ، يجب عليك تثبيتها ثم استيرادها إلى المكون الخاص بك. بمجرد القيام بذلك ، يمكنك استخدام أساليب setTitle () و setTag () لتعيين علامة العنوان والعلامات الوصفية الأخرى ، على التوالي.</p><p style=";text-align:right;direction:rtl"> فيما يلي مثال لكيفية استخدام وحدة العلامات الوصفية في مكون Angular:</p><pre class="notranslate" style=";text-align:right;direction:rtl"> <code class="notranslate language-typescript">import { MetaTagModule } from 'angular-meta-tags';
+
+        @Component({
+          selector: 'app-root',
+          template: `
+            </code><h1 style=";text-align:right;direction:rtl">{{title}}</h1>
+          `,
+        })
+        export class AppComponent {
+          title = 'My Angular App';
+
+          constructor(private metaTagService: MetaTagModule) {
+            this.metaTagService.setTitle(this.title);
+            this.metaTagService.setTag('description', 'This is my Angular app.');
+            this.metaTagService.setTag('keywords', 'angular, app, seo');
+          }
+        }
+        </pre><p style=";text-align:right;direction:rtl">في هذا المثال ، يتم استيراد وحدة العلامات الوصفية إلى المكون ثم استخدامها في المُنشئ لتعيين علامة العنوان والوصف والعلامات الوصفية للكلمات الرئيسية ، على التوالي.</p><h2 style=";text-align:right;direction:rtl"> خاتمة</h2><p style=";text-align:right;direction:rtl"> تعد العلامات الوصفية جزءًا مهمًا من استراتيجية تحسين محركات البحث وتزود محركات البحث بمعلومات مهمة حول موقع الويب. ومع ذلك ، فإن الهندسة المعمارية Angular تقدم بعض التحديات عندما يتعلق الأمر.</p>
+        """
+        let md = xml.renderXMLToMarkdown()
+        print("md:\n", md)
+        
+    }
+    func testCode() {
+        let xml = """
+        <pre><code class="someotherclass language-typescript">import { Title, Meta } from '@angular/platform-browser';
+
+        @Component({
+          selector: 'app-root',
+          template: `
+            <h1>{{title}}</h1>
+          `,
+        })
+        export class AppComponent {
+          title = 'My Angular App';
+
+          constructor(private titleService: Title, private metaService: Meta) {
+            this.titleService.setTitle(this.title);
+            this.metaService.addTags([
+              { name: 'description', content: 'This is my Angular app.' },
+              { name: 'keywords', content: 'angular, app, seo' },
+            ]);
+          }
+        }
+        </code></pre><p>In this example, the Title and Meta services are imported into the component and then used in the constructor to set the title tag and description and keywords meta tags, respectively.</p>
+        """
+        let md = xml.renderXMLToMarkdown()
+        print("md:\n", md)
+    }
     func testSpacings() {
         let xml = """
         <p>Search Engine Optimization (SEO) is crucial for websites that want to be visible on search engines like Google, Bing, and Yahoo. Meta tags are a crucial part of an SEO strategy and provide search engines with information about a website. However, Angular, a popular JavaScript framework for building web applications, presents challenges when implementing meta tags.</p><p>This article will discuss how to get SEO meta tags to work with Angular. We will cover the basics of meta tags, why they are essential for SEO, and how Angular’s architecture affects the implementation of meta tags. Additionally, we will explore various techniques and tools that can be used to overcome the challenges posed by Angular and make sure your website’s meta tags are working optimally for SEO.</p><h2>Why are meta tags important for SEO?</h2><p>Meta tags provide search engines with important information about a website, such as its title, description, and keywords. This information is used by search engines to determine the relevance of a website to a user’s search query and to decide where to place the website in search engine results pages (SERPs).</p><p>The title and description tags are the two most important meta tags for SEO. The title tag is displayed as the title of the search engine result, and the description tag provides a summary of the website’s content. The title and description tags should be unique to each page on a website and accurately reflect that page’s content.</p><p>While less vital than once, keywords still play a role in SEO. The keywords meta tag provides a list of words and phrases related to a website’s content. Search engines use these keywords to determine the relevance of a website to a user’s search query.</p><h2>How Angular affects the implementation of meta tags</h2><p>Angular’s architecture affects the implementation of meta tags in several ways. Firstly, Angular uses client-side rendering, which means that the HTML of a website is generated dynamically on the client side rather than being generated on the server and then sent to the client. This means that search engines cannot crawl the HTML of an Angular website as they can with a traditional server-side rendered website.</p><p>Secondly, Angular’s use of single-page applications (SPAs) means that the HTML of a website is updated dynamically as the user interacts with the website rather than being reloaded each time the user navigates to a new page. This makes it more difficult for search engines to crawl the HTML of an Angular website, as they need to determine when a new page has been loaded quickly.</p><p>Finally, Angular’s use of routing to handle navigation between pages means that the URL of a website does not change when the user navigates to a new page. This can make it difficult for search engines to understand an Angular website’s structure and determine the relevance of each page to a user’s search query.</p><h2>Techniques for implementing meta tags in Angular</h2><p>There are several techniques that can be used to implement meta tags in Angular. These techniques range from using Angular’s built-in features to using third-party libraries and tools.</p><h3>Use Angular’s built-in features</h3><p>Angular provides several built-in features that can be used to implement meta tags. One of these features is the Title service, which allows you to set the title tag for a page. Another is the Meta service, which allows you to set a page’s description and keywords meta tags.</p><p>To use the Title and Meta services, you must import them into your component and use the setTitle() and addTag() methods, respectively. The setTitle() method allows you to set the title tag for a page, while the addTag() method allows you to add other meta tags, such as the description and keywords.</p><p>Here is an example of how you could use the Title and Meta services in an Angular component:</p><pre><code class="language-typescript">import { Title, Meta } from '@angular/platform-browser';

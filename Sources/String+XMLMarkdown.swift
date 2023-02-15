@@ -219,6 +219,7 @@ public extension String {
                     }
                 }
             }
+            print("language: ", language)
             r = r + "```\(language)\n"
             let accum: StringBuilder = StringBuilder()
             for node in node.getChildNodes() {
