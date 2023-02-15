@@ -218,7 +218,6 @@ public extension String {
                         language = cl.substring(from: cl.index(cl.startIndex, offsetBy: 9))
                     }
                 }
-                print("c: ", language)
             }
             r = r + "```\(language)\n"
             let accum: StringBuilder = StringBuilder()
