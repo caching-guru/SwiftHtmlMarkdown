@@ -211,21 +211,34 @@ public extension String {
         }
         else if name == "code" {
             var language = ""
+            var inline = false
             if let c = node.getAttributes()?.get(key: "class") {
                 let classes = c.split(separator: " ")
                 for cl in classes {
                     if cl.prefix(9) == "language-" {
                         language = cl.substring(from: cl.index(cl.startIndex, offsetBy: 9))
                     }
+                    if cl == "inline" {
+                        inline = true
+                    }
                 }
             }
-            print("language: ", language)
-            r = r + "```\(language)\n"
-            let accum: StringBuilder = StringBuilder()
-            for node in node.getChildNodes() {
-                try node.outerHtml(accum)
+            if language == "javascript" && inline {
+                r = r + "`"
+                let accum: StringBuilder = StringBuilder()
+                for node in node.getChildNodes() {
+                    try node.outerHtml(accum)
+                }
+                return r + accum.toString() + "`"
             }
-            return r + accum.toString() + "```\n\n"
+            else {
+                r = r + "```\(language)\n"
+                let accum: StringBuilder = StringBuilder()
+                for node in node.getChildNodes() {
+                    try node.outerHtml(accum)
+                }
+                return r + accum.toString() + "```\n\n"
+            }
         }
         else if name == "ol" {
             counter1 = 1
