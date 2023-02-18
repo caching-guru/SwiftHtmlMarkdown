@@ -10,6 +10,71 @@ import XCTest
 @testable import HtmlMarkdown
 
 class MarkdownTest: XCTestCase {
+    
+    func testLong() {
+        let xml = """
+         <p>Search Engine Optimization (SEO) is a critical aspect of website development and plays a crucial role in driving organic traffic to your website. The primary goal of SEO is to make sure that your website appears at the top of the search engine results pages (SERPs) for relevant keywords. One of the most important aspects of SEO is the use of meta tags.</p><p>Meta tags are HTML tags that provide information about a web page to search engines and web users. They play a significant role in determining the relevancy of your website and its ranking on search engines.</p><p>In this article, we will discuss how to implement SEO and meta tags in React websites. We will start by discussing the importance of SEO and meta tags and then move on to explain how to add meta tags to your React website using the React Helmet library.</p><h2>Importance of SEO and Meta Tags</h2><p>SEO is essential for the success of any website, and it is critical to understand its importance if you want to attract organic traffic to your website. The primary goal of SEO is to improve the visibility of your website on search engines and increase its ranking on SERPs.</p><p>Search engines use various algorithms to determine the relevancy and importance of a website, and meta tags play a significant role in this process. They provide information about the content of your website, such as the title, description, and keywords, which search engines use to determine its relevancy.</p><p>By using relevant meta tags, you can help search engines understand the content of your website, which can improve its ranking on SERPs. Additionally, meta tags can also improve the user experience by providing a brief description of your website, which can help users decide if your website is relevant to their search query.</p><h2>How to Add Meta Tags to React Websites</h2><p>To add meta tags to your React website, you need to use a library called React Helmet. React Helmet is a library that allows you to add and manage the document head section in your React application. It is easy to use and provides a convenient way to add meta tags to your React website.</p><p>To get started with React Helmet, you first need to install it using npm or yarn. Once you have installed it, you can import it into your React component and use it to add meta tags to your website.</p><p>Here’s an example of how to use React Helmet to add a title and description meta tag to your React website:</p><pre class="notranslate"><code class="notranslate language-javascript">
+        import React from "react";
+        import { Helmet } from "react-helmet";
+
+        function MyApp() {
+          return (
+            <div>
+              <Helmet>
+                <title>My React Website</title>
+                <meta name="description" content="A website built with React" />
+              </Helmet>
+              {/* Your component code here */}
+            </div>
+          );
+        }
+
+        export default MyApp;
+        </code></pre><p>In this example, we have imported the React Helmet library and used it to add a title and description meta tag to our website. The <htmltag><title></htmltag> tag sets the title of the page, which will be displayed in the browser’s title bar. The <htmltag><meta></htmltag> tag sets the page’s description, which search engines will use to summarize the content.</p><h2>Keyword Meta Tag</h2><p>The keyword meta tag is used to provide a list of keywords that describe the content of your website. Search engines use this information to determine the relevancy of your website to specific keywords.<br />Here’s an example of how to use React Helmet to add a keyword meta tag to your React website:</p><pre class="notranslate"><code class="notranslate language-javascript">
+        import React from "react";
+        import { Helmet } from "react-helmet";
+
+        function MyApp() {
+          return (
+            <div>
+              <Helmet>
+                <title>My React Website</title>
+                <meta name="description" content="A website built with React" />
+                <meta name="keywords" content="React, JavaScript, Web Development" />
+              </Helmet>
+              {/* Your component code here */}
+            </div>
+          );
+        }
+
+        export default MyApp;
+        </code></pre><p>In this example, we have added a <htmltag><meta name="keywords"></htmltag> tag to provide a list of keywords that describe the content of our website. It is important to note that the keyword meta tag is less important than it used to be, and some search engines may ignore it. However, it is still a good practice to include it, and it can help improve the relevancy of your website for specific keywords.<br />Meta Tag for Social Media<br />If you want to share your website on social media, you need to add meta tags that provide information about your website for social media platforms. These meta tags include the title, description, and image used when your website is shared on social media.<br />Here’s an example of how to use React Helmet to add meta tags for social media to your React website:</p><pre class="notranslate"><code class="notranslate language-javascript">
+        import React from "react";
+        import { Helmet } from "react-helmet";
+
+        function MyApp() {
+          return (
+            <div>
+              <Helmet>
+                <title>My React Website</title>
+                <meta name="description" content="A website built with React" />
+                <meta name="keywords" content="React, JavaScript, Web Development" />
+                <meta property="og:title" content="My React Website" />
+                <meta property="og:description" content="A website built with React" />
+                <meta property="og:image" content="https://example.com/image.jpg" />
+              </Helmet>
+              {/* Your component code here */}
+            </div>
+          );
+        }
+
+        export default MyApp;
+        </code></pre><p>In this example, we have added meta tags for the open graph protocol (og:), which social media platforms use to provide information about your website. The og:title tag sets the title displayed when your website is shared on social media. The og:description tag sets the description that will be displayed, and the og:image tag sets the image that will be displayed.</p><h2>Conclusion</h2><p>In this article, we have discussed how to implement SEO and meta tags in React websites. In addition, we have explained the importance of SEO and meta tags and how to add meta tags to your React website using the React Helmet library. Using meta tags, you can help search engines understand the content of your website and improve its ranking on SERPs. Additionally, meta tags can improve the user experience by providing a brief website description.</p><p>By following the steps outlined in this article, you can improve the SEO of your React website and attract more organic traffic to your website. Remember, SEO is an ongoing process, and it is vital to continually monitor and update your website to ensure that it is optimized for search engines.</p>
+        """
+        let converted = xml.renderXMLToMarkdown()
+        print("converted: \n", converted)
+    }
+    
     func testInlineCode() {
         XCTAssertEqual("hier:`false` is an line code", "hier:<code class=\"inline language-javascript\">false</code> is an line code".renderXMLToMarkdown())
     }

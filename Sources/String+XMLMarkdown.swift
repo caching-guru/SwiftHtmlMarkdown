@@ -232,7 +232,7 @@ public extension String {
                 return r + accum.toString() + "`"
             }
             else {
-                r = r + "\n```\(language)\n"
+                r = r + "```\(language)\n"
                 let accum: StringBuilder = StringBuilder()
                 for node in node.getChildNodes() {
                     try node.outerHtml(accum)
