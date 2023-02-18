@@ -12,17 +12,19 @@ public enum XMLMarkdownError: Error {
     case invalidElement(String)
 }
 
-public extension String {
-    public struct HtmlMarkdownConfig {
-        public enum UnkownElementConfig {
-            case throwError
-            case render
-            case ignore
-        }
-        public var throwUnkownElement: UnkownElementConfig
-        
-        public static var defaultConfig = HtmlMarkdownConfig(throwUnkownElement: .throwError)
+public struct HtmlMarkdownConfig {
+    public enum UnkownElementConfig {
+        case throwError
+        case render
+        case ignore
     }
+    public var throwUnkownElement: UnkownElementConfig
+    
+    public static var defaultConfig = HtmlMarkdownConfig(throwUnkownElement: .throwError)
+}
+
+public extension String {
+    
     func renderXMLToMarkdown(_ config:HtmlMarkdownConfig = .defaultConfig) -> String {
         do {
             let doc: SwiftSoup.Document = try SwiftSoup.parse(self)
