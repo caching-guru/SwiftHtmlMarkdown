@@ -20,6 +20,10 @@ public struct HtmlMarkdownConfig {
     }
     public var throwUnkownElement: UnkownElementConfig
     
+    public init(throwUnkownElement: UnkownElementConfig) {
+        self.throwUnkownElement = throwUnkownElement
+    }
+    
     public static var defaultConfig = HtmlMarkdownConfig(throwUnkownElement: .throwError)
 }
 
