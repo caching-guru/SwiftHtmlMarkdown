@@ -13,14 +13,24 @@ public enum XMLMarkdownError: Error {
 }
 
 public extension String {
-    func renderXMLToMarkdown() -> String {
+    struct HtmlMarkdownConfig {
+        enum UnkownElementConfig {
+            case throwError
+            case render
+            case ignore
+        }
+        var throwUnkownElement: UnkownElementConfig
+        
+        public static var defaultConfig = HtmlMarkdownConfig(throwUnkownElement: .throwError)
+    }
+    func renderXMLToMarkdown(_ config:HtmlMarkdownConfig = .defaultConfig) -> String {
         do {
             let doc: SwiftSoup.Document = try SwiftSoup.parse(self)
             var markdown = ""
             let els =  doc.getChildNodes()
             for e in els {
                 
-                markdown = markdown + (try self.renderChildNode(e))
+                markdown = markdown + (try self.renderChildNode(e, config))
             }
             return markdown.trimmingCharacters(in: .whitespacesAndNewlines)
         } catch Exception.Error(let type, let message) {
@@ -38,7 +48,7 @@ public extension String {
         var r = ""
         for n in node.getChildNodes() {
             
-            r = r + (try self.renderChildNode(n))
+            r = r + (try self.renderChildNode(n, .defaultConfig))
         }
         let desiredLength = columnWidths[index]
         while r.count < desiredLength {
@@ -130,7 +140,7 @@ public extension String {
             var i = 0
             for td in row.getChildNodes() {
                 if td.nodeName() == "td" {
-                    let l = (try self.renderChildNode(td)).count
+                    let l = (try self.renderChildNode(td, .defaultConfig)).count
                     if columnWidths.count <= i {
                         columnWidths.append(0)
                     }
@@ -165,7 +175,7 @@ public extension String {
         }
         return r
     }
-    func renderChildNode(_ node: SwiftSoup.Node, counter: Int = 0, throwError: Bool = true) throws -> String {
+    func renderChildNode(_ node: SwiftSoup.Node, _ config:HtmlMarkdownConfig, counter: Int = 0) throws -> String {
         let name = node.nodeName()
         
         var r = ""
@@ -244,7 +254,7 @@ public extension String {
             counter1 = 1
             for cn in node.getChildNodes() {
                 if cn.nodeName() == "li" {
-                    r = r + (try renderChildNode(cn, counter: counter1))
+                    r = r + (try renderChildNode(cn, config, counter: counter1))
                     counter1 = counter1 + 1
                 }
             }
@@ -254,7 +264,7 @@ public extension String {
             for cn in node.getChildNodes() {
                 counter1 = 0
                 if cn.nodeName() == "li" {
-                    r = r + (try renderChildNode(cn, counter: counter1))
+                    r = r + (try renderChildNode(cn, config, counter: counter1))
                 }
             }
             return r
@@ -290,14 +300,14 @@ public extension String {
         else if name == "blockquote" {
             var renderedBlock = ""
             for cn in node.getChildNodes() {
-                renderedBlock = renderedBlock + (try renderChildNode(cn, counter: counter1))
+                renderedBlock = renderedBlock + (try renderChildNode(cn, config, counter: counter1))
             }
             renderedBlock = "> " + renderedBlock.replacingOccurrences(of: "\n", with: "\n> ")
             return renderedBlock
         }
         else if name == "htmltag" {
             for cn in node.getChildNodes() {
-                r = r + (try renderChildNode(cn, counter: counter1, throwError: false))
+                r = r + (try renderChildNode(cn, HtmlMarkdownConfig(throwUnkownElement: .render), counter: counter1))
             }
             return r
         }
@@ -316,16 +326,25 @@ public extension String {
             // nothing special
         }
         else {
-            if throwError {
+            if config.throwUnkownElement == .throwError {
                 // we are throwing here to make sure we don't get messed up HTML
                 // this will also allow us to deliberately ignore errors if so desired
                 throw XMLMarkdownError.invalidElement("\(name) is not known")
+            }
+            else if config.throwUnkownElement == .ignore {
+                return ""
+            }
+            else if config.throwUnkownElement == .render {
+                return try node.outerHtml()
+            }
+            else {
+                print("unkown, rendering: ", name)
             }
         }
         
         
         for cn in node.getChildNodes() {
-            r = r + (try renderChildNode(cn, counter: counter1))
+            r = r + (try renderChildNode(cn, config, counter: counter1))
         }
         
         if name == "p" {
