@@ -13,13 +13,13 @@ public enum XMLMarkdownError: Error {
 }
 
 public extension String {
-    struct HtmlMarkdownConfig {
-        enum UnkownElementConfig {
+    public struct HtmlMarkdownConfig {
+        public enum UnkownElementConfig {
             case throwError
             case render
             case ignore
         }
-        var throwUnkownElement: UnkownElementConfig
+        public var throwUnkownElement: UnkownElementConfig
         
         public static var defaultConfig = HtmlMarkdownConfig(throwUnkownElement: .throwError)
     }
