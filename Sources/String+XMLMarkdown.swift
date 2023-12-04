@@ -338,7 +338,7 @@ public extension String {
                 throw XMLMarkdownError.invalidElement("\(name) is not known")
             }
             else if config.throwUnkownElement == .ignore {
-                return ""
+                print("unknown, rendering: ", name)
             }
             else if config.throwUnkownElement == .render {
                 return try node.outerHtml()
