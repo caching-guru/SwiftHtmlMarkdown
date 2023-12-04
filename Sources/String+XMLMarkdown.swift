@@ -186,7 +186,7 @@ public extension String {
         
         var r = ""
         var counter1 = counter
-        if ["html", "head", "body", "meta"].contains(name) {
+        if ["html", "head", "body", "meta", "div", "span"].contains(name) {
 
         }
         else if name == "h1" {
