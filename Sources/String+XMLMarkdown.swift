@@ -122,7 +122,15 @@ public extension String {
                         rows.append(n2)
                     }
                 }
-                
+            }
+            else if n.nodeName() == "colgroup" {
+                for n2 in n.getChildNodes() {
+                    if n2.nodeName() == "col",
+                       let widthString = n2.getAttributes()?.get(key: "width"),
+                       let width = Int(widthString) {
+                        columnWidths.append(width)
+                    }
+                }
             }
             else if n.nodeName() == "tbody" {
                 for n2 in n.getChildNodes() {
