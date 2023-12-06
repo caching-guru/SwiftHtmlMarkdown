@@ -90,13 +90,29 @@ public extension String {
         }
         return r + "\n"
     }
-    func renderTableHead(_ node: Node, columnWidths:[Int]) throws -> String {
+    func renderTableHead(_ node: Node?, columnWidths:[Int]) throws -> String {
         var r = ""
-        for e in node.getChildNodes() {
-            if e.nodeName() == "tr" {
-                r = r + (try self.renderTableRow(e, columnWidths: columnWidths))
+
+        if let node = node {
+            for e in node.getChildNodes() {
+                if e.nodeName() == "tr" {
+                    r = r + (try self.renderTableRow(e, columnWidths: columnWidths))
+                }
             }
+        } else {
+            // Add an empty header row
+            r += "|";
+            for index in 0..<columnWidths.count {
+                var filler = ""
+                for _ in 0..<columnWidths[index] {
+                    filler = filler + " "
+                }
+                r = r + " \(filler) |"
+
+            }
+            r = r + "\n"
         }
+
         r = r + (try self.renderTableSeperatorRow(columnWidths: columnWidths))
         return r
     }
@@ -122,7 +138,15 @@ public extension String {
                         rows.append(n2)
                     }
                 }
-                
+            }
+            else if n.nodeName() == "colgroup" {
+                for n2 in n.getChildNodes() {
+                    if n2.nodeName() == "col",
+                       let widthString = n2.getAttributes()?.get(key: "width"),
+                       let width = Int(widthString) {
+                        columnWidths.append(width)
+                    }
+                }
             }
             else if n.nodeName() == "tbody" {
                 for n2 in n.getChildNodes() {
@@ -157,9 +181,11 @@ public extension String {
                 }
             }
         }
+
+        var isHeaderMissing = true
         for n in node.getChildNodes() {
             if n.nodeName() == "thead" {
-                
+                isHeaderMissing = false
                 r = r + (try self.renderTableHead(n, columnWidths: columnWidths))
             }
             else if n.nodeName() == "tbody" {
@@ -179,6 +205,11 @@ public extension String {
                 
             }
         }
+
+        if isHeaderMissing {
+            r = (try self.renderTableHead(nil, columnWidths: columnWidths)) + r
+        }
+
         return r
     }
     func renderChildNode(_ node: SwiftSoup.Node, _ config:HtmlMarkdownConfig, counter: Int = 0) throws -> String {
@@ -186,8 +217,8 @@ public extension String {
         
         var r = ""
         var counter1 = counter
-        if ["html", "head", "body"].contains(name) {
-            
+        if ["html", "head", "body", "meta", "div", "span"].contains(name) {
+
         }
         else if name == "h1" {
             r = r + "# "
@@ -338,7 +369,7 @@ public extension String {
                 throw XMLMarkdownError.invalidElement("\(name) is not known")
             }
             else if config.throwUnkownElement == .ignore {
-                return ""
+                print("unknown, rendering: ", name)
             }
             else if config.throwUnkownElement == .render {
                 return try node.outerHtml()
